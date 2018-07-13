@@ -2,7 +2,10 @@ package com.example.client;
 
 import com.example.util.JsonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -19,8 +22,11 @@ import java.util.Set;
  * @author wangbin
  */
 @Entity
-@Data
 @Table(name = "t_client")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client implements ClientDetails {
   @Id
   @GenericGenerator(name = "uuid", strategy = "uuid")

@@ -1,7 +1,10 @@
 package com.example.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,9 +18,12 @@ import java.util.List;
  * @author wangbin
  */
 @Entity
-@Data
 @JsonIgnoreProperties(value = {"roles", "role"})
 @Table(name = "t_role")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role implements Serializable {
 
   @Id
@@ -29,7 +35,7 @@ public class Role implements Serializable {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy = "roles")
   private List<User> users = new ArrayList<>();
 
   public Role(String name) {
