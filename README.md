@@ -1,13 +1,16 @@
 # Spring 认证服务器
 
-- [获取code](#获取code)
-- [通过code获取token](#通过code获取token)
+- [code方式获取token(可实现单点登陆)](#Code方式获取token)
+    - [获取code](#获取code)
+    - [通过code获取token](#通过code获取token)
+- [通过用户名/密码方式获取token](#通过用户名/密码方式获取token)
 - [检查token](#检查token)
 - [刷新token](#刷新token)
 - [注销](#注销)
+- [测试数据](#测试数据)
 
 
-## code方式获取token(可实现单点登陆)
+## Code方式获取token
 
 ### 获取code
 
@@ -23,7 +26,7 @@ http://localhost:12222/oauth/authorize?response_type=code&client_id=client&redir
 https://www.baidu.com/?code=annqpj&state=123
 ```
 
-### 通过code获取token(可实现单点登陆)
+### 通过code获取token
 
 `POST` 请求(其中Authorization为client:secret的base64加密):
 
@@ -175,7 +178,7 @@ referer为注销成功后跳转页面URL。
 http://localhost:12222/oauth/logout?referer=https%3A%2F%2Fwww.baidu.com
 ```
 
-## 测试脚本
+## 测试数据
 
 测试脚本 [test.sql](test.sql)
 
