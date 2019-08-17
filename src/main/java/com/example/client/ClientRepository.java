@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
  * @author wangbin
  */
 public interface ClientRepository extends JpaRepository<Client, String> {
-  /**
-   * 通过client_id查询client信息
-   *
-   * @param clientId clientId
-   * @return client信息
-   */
-  @Query("select c from Client c where c.clientId=:clientId")
-  Client loadClientByClientId(@Param("clientId") String clientId);
+    /**
+     * 通过client_id查询client信息
+     *
+     * @param clientId clientId
+     * @return client信息
+     */
+    @Query("select c from Client c where c.clientId=:clientId")
+    Client loadClientByClientId(@Param("clientId") String clientId);
 }

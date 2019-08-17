@@ -3,6 +3,7 @@ package com.example.user;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -12,18 +13,18 @@ import javax.annotation.Resource;
  */
 @Component
 public class UserServiceImpl implements UserDetailsService {
-  @Resource
-  private UserRepository userRepository;
+    @Resource
+    private UserRepository userRepository;
 
-  /**
-   * 通过用户名获取用户信息
-   */
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserDetails userDetails = userRepository.loadUserByUsername(username);
-    if (userDetails == null) {
-      throw new NotUserException();
+    /**
+     * 通过用户名获取用户信息
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails userDetails = userRepository.loadUserByUsername(username);
+        if (userDetails == null) {
+            throw new InvalidGrantException("用户名或密码错误");
+        }
+        return userDetails;
     }
-    return userDetails;
-  }
 }

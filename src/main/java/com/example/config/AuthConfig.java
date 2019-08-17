@@ -28,57 +28,57 @@ import javax.annotation.Resource;
 @EnableAuthorizationServer
 public class AuthConfig extends AuthorizationServerConfigurerAdapter {
 
-  @Resource
-  private ClientServiceImpl clientServiceImpl;
-  @Resource
-  private UserServiceImpl userServiceImpl;
-  @Resource
-  private AuthenticationManager authenticationManager;
+    @Resource
+    private ClientServiceImpl clientServiceImpl;
+    @Resource
+    private UserServiceImpl userServiceImpl;
+    @Resource
+    private AuthenticationManager authenticationManager;
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-  /**
-   * 配置自带endpoint权限
-   */
-  @Override
-  public void configure(AuthorizationServerSecurityConfigurer security) {
-    security.tokenKeyAccess("permitAll");
-    security.checkTokenAccess("isAuthenticated()");
-  }
+    /**
+     * 配置自带endpoint权限
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) {
+        security.tokenKeyAccess("permitAll");
+        security.checkTokenAccess("isAuthenticated()");
+    }
 
-  /**
-   * 配置client
-   */
-  @Override
-  public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    // 自定义client实现类
-    clients.withClientDetails(clientServiceImpl);
-  }
+    /**
+     * 配置client
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // 自定义client实现类
+        clients.withClientDetails(clientServiceImpl);
+    }
 
-  /**
-   * 配置endpoint
-   */
-  @Override
-  public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-    endpoints.authenticationManager(authenticationManager);
-    // 自定义user实现类
-    endpoints.userDetailsService(userServiceImpl);
-    // 自定义tokenConverter
-    endpoints.accessTokenConverter(jwtTokenConverter());
-    // 自定义tokenStore
-    endpoints.tokenStore(tokenStore());
-  }
+    /**
+     * 配置endpoint
+     */
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.authenticationManager(authenticationManager);
+        // 自定义user实现类
+        endpoints.userDetailsService(userServiceImpl);
+        // 自定义tokenConverter
+        endpoints.accessTokenConverter(jwtTokenConverter());
+        // 自定义tokenStore
+        endpoints.tokenStore(tokenStore());
+    }
 
-  private TokenStore tokenStore() {
-    // 暂时用内存级存储，之后需要改成redis
-    return new InMemoryTokenStore();
-  }
+    private TokenStore tokenStore() {
+        // 暂时用内存级存储，之后需要改成redis
+        return new InMemoryTokenStore();
+    }
 
-  private AccessTokenConverter jwtTokenConverter() {
-    return new JwtAccessTokenConverter();
-  }
+    private AccessTokenConverter jwtTokenConverter() {
+        return new JwtAccessTokenConverter();
+    }
 
 }

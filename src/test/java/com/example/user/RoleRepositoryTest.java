@@ -12,20 +12,20 @@ import static org.junit.Assert.assertNotNull;
 @DataJpaTest
 @RunWith(SpringRunner.class)
 public class RoleRepositoryTest {
-  private static final String USER = "USER";
-  @Autowired
-  private RoleRepository roleRepository;
+    private static final String USER = "USER";
+    @Autowired
+    private RoleRepository roleRepository;
 
-  @Before
-  public void setUp() {
-    roleRepository.deleteAll();
-    roleRepository.flush();
-    roleRepository.save(new Role(USER));
-  }
+    @Before
+    public void setUp() {
+        roleRepository.deleteAll();
+        roleRepository.flush();
+        roleRepository.save(new Role(USER));
+    }
 
-  @Test
-  public void findByName() {
-    Role byName = roleRepository.findByName(USER);
-    assertNotNull(byName);
-  }
+    @Test
+    public void findByName() {
+        Role byName = roleRepository.findByName(USER);
+        assertNotNull(byName);
+    }
 }

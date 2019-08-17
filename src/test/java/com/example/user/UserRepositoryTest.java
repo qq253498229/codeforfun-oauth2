@@ -14,26 +14,26 @@ import static org.junit.Assert.assertNotNull;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("unit-test")
+@ActiveProfiles("test")
 public class UserRepositoryTest {
 
 
-  private static final String USER = "user";
-  @Autowired
-  private UserRepository userRepository;
+    private static final String USER = "user";
+    @Autowired
+    private UserRepository userRepository;
 
-  @Before
-  public void setUp() {
-    userRepository.deleteAll();
-    userRepository.flush();
-    User user = new User(USER, "password", true, null);
-    userRepository.save(user);
-  }
+    @Before
+    public void setUp() {
+        userRepository.deleteAll();
+        userRepository.flush();
+        User user = new User(USER, "password", true, null);
+        userRepository.save(user);
+    }
 
-  @Test
-  public void loadUserByUsername() {
-    UserDetails user = userRepository.loadUserByUsername(USER);
-    assertNotNull(user);
-    assertEquals(user.getUsername(), USER);
-  }
+    @Test
+    public void loadUserByUsername() {
+        UserDetails user = userRepository.loadUserByUsername(USER);
+        assertNotNull(user);
+        assertEquals(user.getUsername(), USER);
+    }
 }

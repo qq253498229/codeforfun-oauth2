@@ -21,32 +21,32 @@ import static org.junit.Assert.assertTrue;
 @DataJpaTest
 @RunWith(SpringRunner.class)
 public class StartTest {
-  @Resource
-  private UserRepository userRepository;
-  @Resource
-  private RoleRepository roleRepository;
-  @Resource
-  private ClientRepository clientRepository;
+    @Resource
+    private UserRepository userRepository;
+    @Resource
+    private RoleRepository roleRepository;
+    @Resource
+    private ClientRepository clientRepository;
 
-  @Test
-  @Ignore
-  public void testCreateUser() {
-    Role role = new Role("USER");
-    roleRepository.save(role);
-    User user = new User("user", "password", true, Collections.singletonList(role));
-    userRepository.save(user);
-    List<User> all = userRepository.findAll();
-    assertTrue(all.size() > 0);
-  }
+    @Test
+    @Ignore
+    public void testCreateUser() {
+        Role role = new Role("USER");
+        roleRepository.save(role);
+        User user = new User("user", "password", true, Collections.singletonList(role));
+        userRepository.save(user);
+        List<User> all = userRepository.findAll();
+        assertTrue(all.size() > 0);
+    }
 
-  @Test
-  @Ignore
-  public void testCreateClient() {
-    Client client = new Client("client", "secret", "app",
-            "password,authorization_code,refresh_token", "http://localhost:4200",
-            7200, 604800);
-    clientRepository.save(client);
-    List<Client> all = clientRepository.findAll();
-    assertTrue(all.size() > 0);
-  }
+    @Test
+    @Ignore
+    public void testCreateClient() {
+        Client client = new Client("client", "secret", "app",
+                "password,authorization_code,refresh_token", "http://localhost:4200",
+                7200, 604800);
+        clientRepository.save(client);
+        List<Client> all = clientRepository.findAll();
+        assertTrue(all.size() > 0);
+    }
 }

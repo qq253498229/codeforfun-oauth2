@@ -1,14 +1,22 @@
-INSERT INTO oauth.t_client
-  (id, access_token_validity_seconds, additional_information, authorities, authorized_grant_types, auto_approve_scope, client_id, client_secret, refresh_token_validity_seconds, registered_redirect_uri, resource_ids, scope)
-VALUES
-  ('ff808081649507f9016495080da70004', 7200, null, null, 'password,authorization_code,refresh_token', null, 'client', '$2a$10$xBJqaO4VrIXEXmjPdeDBzOECu8JuoK/8XddYhY5PbHTJH.YDJ14xi', 604800, 'http://www.baidu.com', null, 'app');
+INSERT INTO oauth.oauth_client
+( id, client_id, client_secret, access_token_validity_seconds, refresh_token_validity_seconds
+, authorized_grant_types, registered_redirect_uri, scope)
+VALUES (1, 'client', '$2a$10$xBJqaO4VrIXEXmjPdeDBzOECu8JuoK/8XddYhY5PbHTJH.YDJ14xi', 7200, 604800,
+        'password,authorization_code,refresh_token', 'https://www.baidu.com', 'app');
 
-INSERT INTO oauth.t_role (id, name) VALUES ('ff808081649507f9016495080bfb0000', 'USER');
-INSERT INTO oauth.t_role (id, name) VALUES ('ff808081649507f9016495080c4c0001', 'ADMIN');
+INSERT INTO oauth.oauth_user (id, username, password, enabled, create_at, update_at)
+VALUES (1, 'admin', '$2a$10$cI9hPRHj1qUyzZkeTT6eEOdMV0iVpRFQqPo3uaZwlFXu4RZwRRCB6', true, now(), now());
+INSERT INTO oauth.oauth_user (id, username, password, enabled, create_at, update_at)
+VALUES (2, 'user', '$2a$10$COc55C/4boBCAzpQkDitPOjPifJjm56fAJLh1eC35O5LHScdfqaDK', true, now(), now());
 
-INSERT INTO oauth.t_user (id, create_at, enabled, password, phone_id, sex, update_at, username, user_id) VALUES ('ff808081649507f9016495080cc30002', null, true, '$2a$10$COc55C/4boBCAzpQkDitPOjPifJjm56fAJLh1eC35O5LHScdfqaDK', null, null, null, 'user', null);
-INSERT INTO oauth.t_user (id, create_at, enabled, password, phone_id, sex, update_at, username, user_id) VALUES ('ff808081649507f9016495080d370003', null, true, '$2a$10$cI9hPRHj1qUyzZkeTT6eEOdMV0iVpRFQqPo3uaZwlFXu4RZwRRCB6', null, null, null, 'admin', null);
+INSERT INTO oauth.oauth_role (id, name)
+VALUES (1, 'ADMIN');
+INSERT INTO oauth.oauth_role (id, name)
+VALUES (2, 'USER');
 
-INSERT INTO oauth.t_user_role (user_id, role_id) VALUES ('ff808081649507f9016495080cc30002', 'ff808081649507f9016495080bfb0000');
-INSERT INTO oauth.t_user_role (user_id, role_id) VALUES ('ff808081649507f9016495080d370003', 'ff808081649507f9016495080bfb0000');
-INSERT INTO oauth.t_user_role (user_id, role_id) VALUES ('ff808081649507f9016495080d370003', 'ff808081649507f9016495080c4c0001');
+INSERT INTO oauth.mapping_user_role (user_id, role_id)
+VALUES (1, 1);
+INSERT INTO oauth.mapping_user_role (user_id, role_id)
+VALUES (1, 2);
+INSERT INTO oauth.mapping_user_role (user_id, role_id)
+VALUES (2, 2);

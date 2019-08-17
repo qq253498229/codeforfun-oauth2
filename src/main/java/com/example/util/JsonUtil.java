@@ -12,33 +12,33 @@ import java.util.Map;
  */
 public class JsonUtil {
 
-  public static Map<String, Object> parse(String json) {
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      return mapper.readValue(json, HashMap.class);
-    } catch (IOException e) {
-      e.printStackTrace();
+    public static Map<String, Object> parse(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(json, HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    return null;
-  }
 
-  public static <T> T parse(String json, Class<T> clazz) {
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      return mapper.readValue(json, clazz);
-    } catch (IOException e) {
-      e.printStackTrace();
+    public static <T> T parse(String json, Class<T> clazz) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(json, clazz);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    return null;
-  }
 
-  public static String toJson(Object object) {
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      return mapper.writeValueAsString(object);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
+    public static String toJson(Object object) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    return null;
-  }
 }

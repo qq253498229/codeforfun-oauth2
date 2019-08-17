@@ -12,24 +12,24 @@ import javax.annotation.Resource;
  */
 @Component
 public class ClientServiceImpl implements ClientDetailsService {
-  @Resource
-  private ClientRepository clientRepository;
+    @Resource
+    private ClientRepository clientRepository;
 
-  @Override
-  public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-    ClientDetails clientDetails = clientRepository.loadClientByClientId(clientId);
-    if (clientDetails == null) {
-      throw new ClientNotExistException();
+    @Override
+    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
+        ClientDetails clientDetails = clientRepository.loadClientByClientId(clientId);
+        if (clientDetails == null) {
+            throw new ClientNotExistException();
+        }
+        return clientDetails;
     }
-    return clientDetails;
-  }
 
-  boolean save(Client client) {
-    Client customClient = clientRepository.loadClientByClientId(client.getClientId());
-    if (customClient != null) {
-      throw new ClientExistException();
+    boolean save(Client client) {
+        Client customClient = clientRepository.loadClientByClientId(client.getClientId());
+        if (customClient != null) {
+            throw new ClientExistException();
+        }
+        clientRepository.save(client);
+        return true;
     }
-    clientRepository.save(client);
-    return true;
-  }
 }

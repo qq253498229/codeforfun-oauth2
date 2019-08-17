@@ -22,95 +22,77 @@ import java.util.List;
  */
 @Entity
 @JsonIgnoreProperties(value = {"users", "user"})
-@Table(name = "t_user")
+@Table(name = "oauth_user")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
-  @Id
-  @GenericGenerator(name = "uuid", strategy = "uuid")
-  @GeneratedValue(generator = "uuid")
-  @Column(length = 32)
-  private String id;
+    @Id
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GeneratedValue(generator = "uuid")
+    @Column(length = 36)
+    private String id;
 
-  private Date createAt;
+    private Date createAt = new Date();
 
-  private Date updateAt;
+    private Date updateAt = new Date();
 
-  @ManyToOne
-  @JoinColumn(name = "user_id", insertable = false, updatable = false)
-  private User createBy;
+    /**
+     * 用户名
+     */
+    @Column(unique = true, nullable = false, length = 64)
+    private String username;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id", insertable = false, updatable = false)
-  private User updateBy;
-  /**
-   * 用户名
-   */
-  @Column(unique = true, nullable = false, length = 64)
-  private String username;
+    /**
+     * 密码
+     */
+    @Column(nullable = false, length = 128)
+    private String password;
 
-  /**
-   * 手机
-   */
-  @Column(unique = true, length = 20)
-  private String phoneId;
+    @Column
+    private Boolean enabled = true;
 
-  /**
-   * 密码
-   */
-  @Column(nullable = false, length = 128)
-  private String password;
+    @ManyToMany
+    @JoinTable(
+            name = "mapping_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
-  /**
-   * 性别，0女，1男，2其它
-   */
-  private Integer sex;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        this.roles.forEach(role -> authorities.add(role::getName));
+        return authorities;
+    }
 
-  @Column
-  private Boolean enabled = true;
+    public User(String username, String password, Boolean enabled, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
+    }
 
-  @ManyToMany
-  @JoinTable(
-          name = "t_user_role",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "role_id")
-  )
-  private List<Role> roles = new ArrayList<>();
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    Collection<GrantedAuthority> authorities = new ArrayList<>();
-    this.roles.forEach(role -> authorities.add(role::getName));
-    return authorities;
-  }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-  public User(String username, String password, Boolean enabled, List<Role> roles) {
-    this.username = username;
-    this.password = password;
-    this.enabled = enabled;
-    this.roles = roles;
-  }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return this.enabled;
-  }
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 
 }

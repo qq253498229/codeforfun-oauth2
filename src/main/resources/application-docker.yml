@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: oauth
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://mysql:3306/oauth?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
