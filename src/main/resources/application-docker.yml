@@ -7,5 +7,9 @@ spring:
     url: jdbc:mysql://${DB_URL:mysql}:${DB_PORT:3306}/${DB_NAME:oauth}?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&createDatabaseIfNotExist=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
 server:
   port: ${SERVER_PORT:8080}
