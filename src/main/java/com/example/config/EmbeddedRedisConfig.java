@@ -14,9 +14,13 @@ public class EmbeddedRedisConfig {
     private RedisServer redisServer;
 
     @PostConstruct
-    public void startRedis() throws IOException {
+    public void getRedisServer() throws IOException {
         redisServer = new RedisServer(6379);
-        redisServer.start();
+        try {
+            redisServer.start();
+        } catch (Exception ignored) {
+
+        }
     }
 
     @PreDestroy

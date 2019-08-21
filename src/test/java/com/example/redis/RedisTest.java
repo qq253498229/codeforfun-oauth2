@@ -1,6 +1,5 @@
 package com.example.redis;
 
-import com.example.base.BaseRedis;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataRedisTest
-public class RedisTest extends BaseRedis {
+public class RedisTest {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
