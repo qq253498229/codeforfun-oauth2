@@ -1,7 +1,8 @@
 spring:
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: update
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
+  profiles:
+    active: default

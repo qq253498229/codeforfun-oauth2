@@ -81,7 +81,7 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore() {
         // 暂时用内存级存储，之后需要改成redis
-        if (redisProperties.getEnable()) {
+        if ("true".equals(redisProperties.getEnable()) || "true".equals(redisProperties.getEmbeddedEnable())) {
             return new RedisTokenStore(redisConnectionFactory);
         }
         return new InMemoryTokenStore();

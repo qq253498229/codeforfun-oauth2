@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {
+      "name": "spring.redis",
+      "type": "com.example.config.EmbeddedRedisConfig$RedisProperties",
+      "sourceType": "com.example.config.EmbeddedRedisConfig$RedisProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.redis.cache-timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "com.example.config.EmbeddedRedisConfig$RedisProperties",
+      "defaultValue": 120
+    },
+    {
+      "name": "spring.redis.embedded-enable",
+      "type": "java.lang.String",
+      "sourceType": "com.example.config.EmbeddedRedisConfig$RedisProperties",
+      "defaultValue": "true"
+    },
+    {
+      "name": "spring.redis.enable",
+      "type": "java.lang.String",
+      "sourceType": "com.example.config.EmbeddedRedisConfig$RedisProperties",
+      "defaultValue": "false"
+    }
+  ],
+  "hints": []
+}

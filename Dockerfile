@@ -1,14 +1,14 @@
 FROM maven:3-jdk-8-alpine
 WORKDIR /app
 COPY pom.xml ./pom.xml
-RUN mvn package -P aliyun -P docker -Dmaven.test.skip=true
+RUN mvn package -P local-maven-registry -Dmaven.test.skip=true
 
 FROM maven:3-jdk-8-alpine
 WORKDIR /app
 COPY src ./src
 COPY --from=0 /app/pom.xml ./pom.xml
 COPY --from=0 /root/.m2 /root/.m2
-RUN mvn package -P aliyun -P docker -Dmaven.test.skip=true
+RUN mvn package -P local-maven-registry -Dmaven.test.skip=true
 
 FROM openjdk:8-jre-alpine
 ENV TZ=PRC

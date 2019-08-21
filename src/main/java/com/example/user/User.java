@@ -1,6 +1,8 @@
 package com.example.user;
 
+import com.example.util.CustomAuthorityDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +23,12 @@ import java.util.List;
  * @author wangbin
  */
 @Entity
-@JsonIgnoreProperties(value = {"users", "user"})
 @Table(name = "oauth_user")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid")
@@ -61,6 +63,7 @@ public class User implements UserDetails {
     )
     private List<Role> roles = new ArrayList<>();
 
+    @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();

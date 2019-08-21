@@ -9,5 +9,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     enable: false
+    embedded-enable: true
+  jpa:
+    show-sql: true
 server:
   port: 12222

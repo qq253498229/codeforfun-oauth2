@@ -12,5 +12,7 @@ spring:
     host: ${REDIS_HOST:redis}
     port: ${REDIS_PORT:6379}
     password: ${REDIS_PASSWORD:}
+    cache-timeout: ${REDIS_CACHE_TIMEOUT:120}
+    embedded-enable: ${REDIS_EMBEDDED_ENABLE:false}
 server:
   port: ${SERVER_PORT:8080}
