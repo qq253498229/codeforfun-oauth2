@@ -4,7 +4,7 @@ spring:
   datasource:
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
-    url: jdbc:mysql://${DB_URL:mysql}:${DB_PORT:3306}/${DB_NAME:oauth}?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:oauth}?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&createDatabaseIfNotExist=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
