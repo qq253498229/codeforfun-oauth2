@@ -1,6 +1,7 @@
 package com.example.client;
 
 import com.example.util.JsonUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client implements ClientDetails {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid")

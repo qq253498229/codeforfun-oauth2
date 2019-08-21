@@ -1,8 +1,10 @@
 version: "3"
 services:
   oauth:
-    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.0
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1
     build: .
+    environment:
+      REDIS_ENABLE: 'true'
     ports:
       - "12222:8080"
   mysql:
@@ -13,3 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
+  redis:
+    image: redis:5.0.5-alpine
+    ports:
+      - "6379:6379"

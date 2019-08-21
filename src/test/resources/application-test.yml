@@ -1,0 +1,5 @@
+spring:
+  redis:
+    embedded-enable: true
+  jpa:
+    show-sql: true

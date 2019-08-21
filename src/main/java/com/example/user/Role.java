@@ -18,12 +18,12 @@ import java.util.List;
  * @author wangbin
  */
 @Entity
-@JsonIgnoreProperties(value = {"roles", "role"})
 @Table(name = "oauth_role")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements Serializable {
 
     @Id
