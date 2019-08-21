@@ -1,5 +1,6 @@
 package com.example.user;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserDetailsService {
      * 通过用户名获取用户信息
      */
     @Override
+    @Cacheable(value = "users", key = "#username")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails userDetails = userRepository.loadUserByUsername(username);
         if (userDetails == null) {

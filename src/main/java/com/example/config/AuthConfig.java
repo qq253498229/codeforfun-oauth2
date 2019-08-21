@@ -4,6 +4,7 @@ import com.example.client.ClientServiceImpl;
 import com.example.user.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 
@@ -34,6 +36,11 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
     private UserServiceImpl userServiceImpl;
     @Resource
     private AuthenticationManager authenticationManager;
+    @Resource
+    private RedisConnectionFactory redisConnectionFactory;
+
+    @Resource
+    private EmbeddedRedisConfig.RedisProperties redisProperties;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -74,6 +81,9 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore() {
         // 暂时用内存级存储，之后需要改成redis
+        if (redisProperties.getEnable()) {
+            return new RedisTokenStore(redisConnectionFactory);
+        }
         return new InMemoryTokenStore();
     }
 
