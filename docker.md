@@ -1,8 +1,13 @@
+
 源码地址: 
 
 [Github仓库](https://github.com/qq253498229/codeforfun-oauth2)
 
 [码云仓库](https://gitee.com/consolelog/codeforfun-oauth2)
+
+阿里云仓库镜像: `registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1`
+
+官方仓库镜像: `codeforfun/oauth:1.0.1`
 
 最小化例子:
 
@@ -54,3 +59,4 @@ REDIS_HOST | redis host，默认redis
 REDIS_PORT | redis port，默认6379
 REDIS_PASSWORD | redis密码，默认为空
 REDIS_CACHE_TIMEOUT | 缓存超时时间，单位为分钟，默认120分钟
+

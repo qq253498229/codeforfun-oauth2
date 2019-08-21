@@ -194,6 +194,16 @@ http://localhost:12222/oauth/logout?referer=https%3A%2F%2Fwww.baidu.com
 
 ## 容器化
 
+源码地址: 
+
+[Github仓库](https://github.com/qq253498229/codeforfun-oauth2)
+
+[码云仓库](https://gitee.com/consolelog/codeforfun-oauth2)
+
+阿里云仓库镜像: `registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1`
+
+官方仓库镜像: `codeforfun/oauth:1.0.1`
+
 最小化例子:
 
 ```yaml
