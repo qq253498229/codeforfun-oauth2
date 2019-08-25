@@ -200,9 +200,9 @@ http://localhost:12222/oauth/logout?referer=https%3A%2F%2Fwww.baidu.com
 
 [码云仓库](https://gitee.com/consolelog/codeforfun-oauth2)
 
-阿里云仓库镜像: `registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1`
+阿里云仓库镜像: `registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.2`
 
-官方仓库镜像: `codeforfun/oauth:1.0.1`
+官方仓库镜像: `codeforfun/oauth:1.0.2`
 
 最小化例子:
 
@@ -210,7 +210,7 @@ http://localhost:12222/oauth/logout?referer=https%3A%2F%2Fwww.baidu.com
 version: "3"
 services:
   oauth:
-    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.2
     ports:
       - "8080:8080"
   mysql:
@@ -225,7 +225,7 @@ services:
 version: "3"
 services:
   oauth:
-    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.1
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/oauth:1.0.2
     environment:
       REDIS_ENABLE: 'true'
     ports:
