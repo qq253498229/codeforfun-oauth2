@@ -52,6 +52,7 @@ public class AuthConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
+        security.passwordEncoder(passwordEncoder());
         security.tokenKeyAccess("permitAll");
         security.checkTokenAccess("isAuthenticated()");
     }
